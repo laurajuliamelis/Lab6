@@ -49,7 +49,7 @@ brute_force_knapsack <- function(x, W){
       temp_value <- sum(x[,2][as.logical(bin[i,])])
       
       if(temp_value > value || (temp_value == value && temp_weigth < weight)){
-        weigth <- temp_weight
+        weight <- temp_weight
         value <- temp_value
         elements <- which(as.logical(bin[i,]))
       }
