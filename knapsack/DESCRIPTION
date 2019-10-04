@@ -1,4 +1,4 @@
-Package: rSwedishParliamentVotations
+Package: knapsack
 Type: Package
 Title: API for Votations in the Swedish Parliment
 Version: 1.0.0

@@ -1,7 +1,7 @@
 # Project Status
-[![Build Status](https://travis-ci.org/laurajuliamelis/Lab5.svg?branch=master)](https://travis-ci.org/laurajuliamelis/Lab5)
+[![Build Status](https://travis-ci.org/laurajuliamelis/Lab6.svg?branch=master)](https://travis-ci.org/laurajuliamelis/Lab6)
 
-# Lab 5: Swedish Parliament Votation API
+# Lab 6: knapsack
 
 Intermediate API package for the Swedish Parliament Votations.
 
@@ -23,7 +23,7 @@ install.packages("testthat")
 Run the following in R:
 
 ```
-devtools::install_github("laurajuliamelis/Lab5", subdir="rSwedishParliamentVotations")
+devtools::install_github("laurajuliamelis/Lab6", subdir="knapsack")
 ```
 
 ## Running the tests
