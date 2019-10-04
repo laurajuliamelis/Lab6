@@ -1,0 +1,15 @@
+---
+title: "rSwedishParliamentVotations: An API package for votations in the Swedish Parliament."
+author: "Laura Julià Melis and Martin Svensson"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rSwedishParliamentVotations: An API package for votations in the Swedish Parliament}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+## 1. Introduction.
+
+
+## References.
+* API conection: <http://data.riksdagen.se/>
