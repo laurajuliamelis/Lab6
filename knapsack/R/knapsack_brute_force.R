@@ -1,13 +1,22 @@
-#' GET_votation
+#' The knapsack problem: brute force algorithm.
 #'
-#' \code{GET_votation} makes a GET request for data from the 
-#' Swedish Parlament API, specifically for votations.
+#' The knapsack problem is a discrete optimization problem where we have a knapsack that can take a 
+#' limited weight W and we want to fill this knapsack with a number of items i = 1,...,n, each with 
+#' a weight w(i) and a value v(i). The goal is to find the knapsack with the largest value of the 
+#' elements added to the knapsack.
 #' 
+#' \code{brute_force_knapsack} uses the brute-force algorithm. This algorithms works by going through
+#' all possible alternatives (all possible combinations 2n needs are evaluated) and return the maximum
+#' value found.
 #' 
-#' @param period a 
-#' @param span b
-
-#' @return 
+#' @param x an object of class data.frame with two variables v (values) and w (weights).
+#' @param W numeric scalar object that represents the knapsack size.
+#'
+#' @return  \code{brute_force_knapsack} returns a list with two elements: 
+#' 
+#' (i) the elements added to the knapsack and 
+#' 
+#' (ii) the maximum knapsack value.
 #'
 #' @examples
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
@@ -15,14 +24,12 @@
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
 #' brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
 #' 
-#' @references \url{http://data.riksdagen.se/}
+#' @references \url{https://en.wikipedia.org/wiki/Knapsack_problem}
 #'
-#' @importFrom xml2 read_xml
 #'
 #' @export
 #' 
 
-# Function
 brute_force_knapsack <- function(x, W){
   combn <- 1:(2^nrow(x))
   bin <- matrix(NA, nrow=2^nrow(x), ncol=nrow(x))
