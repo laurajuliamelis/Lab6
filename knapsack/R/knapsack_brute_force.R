@@ -12,11 +12,7 @@
 #' @param x an object of class data.frame with two variables v (values) and w (weights).
 #' @param W numeric scalar object that represents the knapsack size.
 #'
-#' @return  \code{brute_force_knapsack} returns a list with two elements: 
-#' 
-#' (i) the elements added to the knapsack and 
-#' 
-#' (ii) the maximum knapsack value.
+#' @return  \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 #'
 #' @examples
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
