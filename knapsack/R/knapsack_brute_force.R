@@ -6,7 +6,7 @@
 #' elements added to the knapsack.
 #' 
 #' \code{brute_force_knapsack} uses the brute-force algorithm. This algorithms works by going through
-#' all possible alternatives (all possible combinations 2n needs are evaluated) and return the maximum
+#' all possible alternatives (all possible combinations 2n are evaluated) and return the maximum
 #' value found.
 #' 
 #' @param x an object of class data.frame with two variables v (values) and w (weights).
