@@ -37,6 +37,10 @@ library(knapsack)
 # We need this package to measure the time that it takes to evaluate the functions.
 #install.packages("microbenchmark")
 library(microbenchmark)
+
+# We need this package for the profiling.
+# install.packages("profvis")
+library(profvis)
 ```
 
 
@@ -66,9 +70,7 @@ brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 
 We will use the function `microbenchmark` to measure the time that it takes to evaluate this function:
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500), times = 5)
-# RUN BEFORE SUBMITTING
-# microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
 
@@ -83,9 +85,7 @@ knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 
 **QUESTION: How much time does it takes to run the algorithm for n = 500 objects?**
 ```{r}
-microbenchmark(knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500), times = 5)
-# RUN BEFORE SUBMITTING: 
-# microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
+microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
 ```
 
 ### 2.3. greedy_knapsack( ).
@@ -103,15 +103,36 @@ set.seed(42)
 n <- 1000000
 knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
                                 v=runif(n = n, 0, 10000))
-# RUN BEFORE SUBMITTING
-# microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
 
-microbenchmark(greedy_knapsack(x = knapsack_objects[1:8,], W = 3500), times = 5)
+microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
 ```
 
 ## 3. Profiling and optimization.
+**NOTE:** Package `lineprof` is not available for R version 3.6.1, so we will use package `profvis` instead.
+
+### 3.1.  Brute force search algorithm.
+```{r}
+profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```
+
+### 3.2. Dynamic programming algorithm.
+```{r}
+profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```
+
+### 3.3. Greddy approximation algorithm.
+```{r}
+profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+```
 
 **QUESTION: What performance gain could you get by trying to improving your code?**
+
+After analyzing the `profvis` outputs we consider that, regarding the `brute_force_knapsack()` and the `greedy_knapsack()` functions, they are fast enough given the large amount of data they are evaluating. 
+
+Concerning the `knapsack_dynamic()` function, we can see how there are some lines of code that are a bit time consuming.
+
+So maybe we could get a performance gain in this algorithm by using Rcpp and C++, but the gain would be really small.
+
 
 ## 4. Implentation in `Rcpp`.
 
@@ -120,6 +141,32 @@ microbenchmark(greedy_knapsack(x = knapsack_objects[1:8,], W = 3500), times = 5)
 ## 5. Parallelization of brute force search.
 
 **QUESTION: What performance gain could you get by parallelizing brute force search?**
+
+  -**If n=16.**
+  
+Process time with `parallel=FALSE` (by default):
+```{r}
+microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:16,], W = 3500), times = 5)
+```
+
+Process time with `parallel=TRUE` :
+```{r}
+microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
+```
+
+  -**If n=20.**
+  
+Process time with `parallel=FALSE` (by default):
+```{r}
+microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:20,], W = 3500), times = 1)
+```
+
+Process time with `parallel=TRUE` :
+```{r}
+microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+```
+
+We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. 
 
 ## References.
 * Brute force algorithm: <https://en.wikipedia.org/wiki/Knapsack_problem>
