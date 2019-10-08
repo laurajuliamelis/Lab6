@@ -26,11 +26,10 @@
 
 
 # Function
-brute_force_knapsack2 <- function(x, W){
+brute_force_knapsack2 <- function(x, W, parallel = FALSE){
   combn <- 1:(2^nrow(x))
   
-  
-  .body <- function(i, span, x, W){
+  .calculate_row <- function(i, span, x, W){
     bin <- as.logical(head(intToBits(span[i]), nrow(x)))
     temp_weight <- sum(x[,1][bin])
     
@@ -44,22 +43,26 @@ brute_force_knapsack2 <- function(x, W){
   
   result <- list()
   
-  # Leave 1 core for other processes to not lock the computer.
-  no_cores <- max(1, detectCores() - 1)
-  
-  if(Sys.info()['sysname'] == "Windows"){
-    cl <- makeCluster(no_cores, type="PSOCK") 
+  if(parallel){
+    # Leave 1 core for other processes to not lock the computer.
+    no_cores <- max(1, detectCores() - 1)
+    
+    if(Sys.info()['sysname'] == "Windows"){
+      cl <- makeCluster(no_cores, type="PSOCK") 
+    }else{
+      cl <- makeCluster(no_cores, type="FORK") 
+    }
+    result <- parLapply(cl=cl, X=combn, fun=.calculate_row, combn, x, W, chunk.size = as.integer(combn/no_cores))
+    
+    #registerDoParallel(cl)
+    #result <- foreach(i=combn) %dopar% .calculate_row(i, combn, x, W)
+    stopCluster(cl)
   }else{
-    cl <- makeCluster(no_cores, type="FORK") 
+    for(i in combn){
+      result[[i]] <- .calculate_row(i, combn, x, W)
+    }
   }
-  registerDoParallel(cl)
-  result <- foreach(i=combn) %dopar% .body(i, combn, x, W)
-  stopCluster(cl)
   
-  # result <- list()
-  # for(i in combn){
-  #   result[[i]] <- .body(i, combn, x, W)
-  # }
   result <- matrix(unlist(result), byrow = TRUE, ncol=2)
   result_index <- which.max(result[,2])
   value <- result[result_index, 2]

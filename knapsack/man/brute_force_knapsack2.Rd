@@ -4,7 +4,7 @@
 \alias{brute_force_knapsack2}
 \title{GET_votation}
 \usage{
-brute_force_knapsack2(x, W)
+brute_force_knapsack2(x, W, parallel = FALSE)
 }
 \arguments{
 \item{period}{a}
