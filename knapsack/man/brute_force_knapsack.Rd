@@ -12,6 +12,14 @@ brute_force_knapsack(x, W, parallel = FALSE)
 \item{W}{numeric scalar object that represents the knapsack size.}
 
 \item{parallel}{make the function run in parallel.}
+
+\item{itr}{iterator}
+
+\item{span}{vector of the span for x}
+
+\item{data_frame}{the data x}
+
+\item{weigth}{the weight W}
 }
 \value{
 \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
@@ -27,8 +35,13 @@ elements added to the knapsack.
 all possible alternatives (all possible combinations 2n are evaluated) and return the maximum
 value found.
 }
+\section{Functions}{
+\itemize{
+\item \code{brute_force_knapsack}: Description in main function.
+}}
+
 \examples{
-knapsack_objects <- generate_knapsack()
+knapsack_objects <- generate_backpack()
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)

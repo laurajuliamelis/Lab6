@@ -146,24 +146,24 @@ So maybe we could get a performance gain in this algorithm by using Rcpp and C++
   
 Process time with `parallel=FALSE` (by default):
 ```{r}
-microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:16,], W = 3500), times = 5)
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
 Process time with `parallel=TRUE` :
 ```{r}
-microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
 ```
 
   -**If n=20.**
   
 Process time with `parallel=FALSE` (by default):
 ```{r}
-microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:20,], W = 3500), times = 1)
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
 ```
 
 Process time with `parallel=TRUE` :
 ```{r}
-microbenchmark(brute_force_knapsack2(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
 ```
 
 We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. 

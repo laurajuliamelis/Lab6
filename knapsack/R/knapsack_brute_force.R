@@ -12,6 +12,12 @@
 #' @param x an object of class data.frame with two variables v (values) and w (weights).
 #' @param W numeric scalar object that represents the knapsack size.
 #' @param parallel make the function run in parallel.
+#' 
+#' @param itr iterator
+#' @param span vector of the span for x
+#' @param data_frame the data x
+#' @param weigth the weight W
+#' @usage itr <- iterator
 #'
 #' @return  \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 #'
@@ -34,13 +40,14 @@
 brute_force_knapsack <- function(x, W, parallel = FALSE){
   combn <- 1:(2^nrow(x))
   
-  .calculate_row <- function(i, span, x, W){
-    bin <- as.logical(head(intToBits(span[i]), nrow(x)))
-    temp_weight <- sum(x[,1][bin])
+  #' @describeIn brute_force_knapsack Description in main function.
+  .calculate_row <- function(itr, span, data_frame, weight){
+    bin <- as.logical(head(intToBits(span[itr]), nrow(data_frame)))
+    temp_weight <- sum(data_frame[,1][bin])
     
-    if(temp_weight <= W){
+    if(temp_weight <= weight){
       return(c(temp_weight,
-               sum(x[,2][bin])))
+               sum(data_frame[,2][bin])))
     }else{
       return(c(NA,NA))
     }
