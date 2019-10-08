@@ -17,7 +17,9 @@
 #' 
 #' @references \url{http://data.riksdagen.se/}
 #'
-#' @importFrom xml2 read_xml
+#' @import parallel
+#' @import foreach
+#' @import doParallel
 #'
 #' @export
 #' 
