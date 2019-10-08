@@ -319,12 +319,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>The functions return a list with two elements: the elements added to the knapsack and the maximum knapsack value.</p>
 <div id="instalation." class="section level3">
 <h3>Instalation.</h3>
-<p>The first thing to do to be able to acces the functions is to install and load the package. But first we may ne</p>
+<p>The first thing to do to be able to acces the functions is to install and load the package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># You may need to install and load this package first: install.packages(&quot;devtools&quot;)</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(devtools)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># devtools::install_github(&quot;laurajuliamelis/Lab6&quot;,subdir=&quot;knapsack&quot;)</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># library(knapsack)</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(knapsack)</a></code></pre></div>
 </div>
 </div>
 <div id="functions." class="section level2">
@@ -349,14 +349,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## [1] 4 5 7</code></pre>
 <p><strong>QUESTION: How much time does it takes to run the algorithm for n = 16 objects?</strong></p>
 <p>We will use the function <code>microbenchmark</code> to measure the time that it takes to evaluate this function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>), <span class="dt">times =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
 ##                                                         expr      min
-##  brute_force_knapsack(x = knapsack_objects[1:8, ], W = 3500) 5.709092
-##        lq     mean  median       uq      max neval
-##  6.489162 7.813569 7.32618 9.095201 14.09822   100</code></pre>
+##  brute_force_knapsack(x = knapsack_objects[1:8, ], W = 3500) 5.811065
+##       lq     mean   median       uq      max neval
+##  6.30012 7.117725 6.331317 7.874316 9.271805     5</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># RUN BEFORE SUBMITTING</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)</span></a></code></pre></div>
 </div>
 <div id="knapsack_dynamic-." class="section level3">
 <h3>2.2. knapsack_dynamic( ).</h3>
@@ -369,14 +369,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## $elements
 ## [1] 4 5 7</code></pre>
 <p><strong>QUESTION: How much time does it takes to run the algorithm for n = 500 objects?</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>), <span class="dt">times =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
-##                                                     expr      min      lq
-##  knapsack_dynamic(x = knapsack_objects[1:8, ], W = 3500) 34.17525 37.2455
-##      mean   median       uq     max neval
-##  40.82722 38.61926 42.65498 59.4875   100</code></pre>
+##                                                     expr      min       lq
+##  knapsack_dynamic(x = knapsack_objects[1:8, ], W = 3500) 38.87647 41.17427
+##      mean  median       uq      max neval
+##  44.07785 42.1436 47.23641 50.95846     5</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># RUN BEFORE SUBMITTING: </span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)</span></a></code></pre></div>
 </div>
 <div id="greedy_knapsack-." class="section level3">
 <h3>2.3. greedy_knapsack( ).</h3>
@@ -394,14 +394,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb15-3" data-line-number="3">knapsack_objects &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">w=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4000</span>, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb15-4" data-line-number="4">                                <span class="dt">v=</span><span class="kw">runif</span>(<span class="dt">n =</span> n, <span class="dv">0</span>, <span class="dv">10000</span>))</a>
 <a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co"># RUN BEFORE SUBMITTING</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)</span></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">microbenchmark</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">microbenchmark</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>), <span class="dt">times =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                                    expr     min      lq
-##  greedy_knapsack(x = knapsack_objects[1:8, ], W = 3500) 196.847 199.039
+##  greedy_knapsack(x = knapsack_objects[1:8, ], W = 3500) 213.657 216.973
 ##      mean  median      uq     max neval
-##  204.7748 199.956 202.626 372.922   100</code></pre>
+##  255.9842 221.578 236.406 391.307     5</code></pre>
 </div>
 </div>
 <div id="profiling-and-optimization." class="section level2">

@@ -22,7 +22,7 @@ elements added to the knapsack.
 }
 \details{
 \code{brute_force_knapsack} uses the brute-force algorithm. This algorithms works by going through
-all possible alternatives (all possible combinations 2n needs are evaluated) and return the maximum
+all possible alternatives (all possible combinations 2n are evaluated) and return the maximum
 value found.
 }
 \examples{
