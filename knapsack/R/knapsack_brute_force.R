@@ -42,8 +42,13 @@ brute_force_knapsack <- function(x, W, parallel = FALSE, fast = FALSE){
   combn <- 1:(2^nrow(x))
   
   #' @describeIn brute_force_knapsack Description in main function.
-  .calculate_row <- function(itr, span, data_frame, weight){
-    bin <- as.logical(head(intToBits(span[itr]), nrow(data_frame)))
+  .calculate_row <- function(itr, span, data_frame, weight, use_cpp){
+    if(use_cpp){
+      bin <- as.logical(intToBinary(span[itr], nrow(data_frame)))
+    }else{
+      bin <- as.logical(head(intToBits(span[itr]), nrow(data_frame)))
+    }
+    
     temp_weight <- sum(data_frame[,1][bin])
     
     if(temp_weight <= weight){
@@ -66,11 +71,11 @@ brute_force_knapsack <- function(x, W, parallel = FALSE, fast = FALSE){
       cl <- makeCluster(no_cores, type="FORK") 
     }
     result <- parLapply(cl=cl, X=combn, fun=.calculate_row, 
-                        combn, x, W, chunk.size = as.integer(combn/no_cores))
+                        combn, x, W, use_cpp=fast, chunk.size = as.integer(combn/no_cores))
     stopCluster(cl)
   }else{
     for(i in combn){
-      result[[i]] <- .calculate_row(i, combn, x, W)
+      result[[i]] <- .calculate_row(i, combn, x, W, use_cpp=fast)
     }
   }
   
