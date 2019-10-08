@@ -4,12 +4,14 @@
 \alias{brute_force_knapsack}
 \title{The knapsack problem: brute force algorithm.}
 \usage{
-brute_force_knapsack(x, W)
+brute_force_knapsack(x, W, parallel = FALSE)
 }
 \arguments{
 \item{x}{an object of class data.frame with two variables v (values) and w (weights).}
 
 \item{W}{numeric scalar object that represents the knapsack size.}
+
+\item{parallel}{make the function run in parallel.}
 }
 \value{
 \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
@@ -26,10 +28,12 @@ all possible alternatives (all possible combinations 2n are evaluated) and retur
 value found.
 }
 \examples{
+knapsack_objects <- generate_knapsack()
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
 brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
+brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500, parallel=TRUE)
 
 }
 \references{

@@ -19,4 +19,6 @@ Suggests:
     roxygen2,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    devtools,
+    microbenchmark

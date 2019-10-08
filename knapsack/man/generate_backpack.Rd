@@ -21,5 +21,4 @@ Swedish Parlament API, specifically for votations.
 \examples{
 generate_backpack()
 
-
 }

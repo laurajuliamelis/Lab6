@@ -12,6 +12,7 @@
 #' @examples
 #' generate_backpack()
 #' 
+#' @importFrom stats runif
 #'
 #' @export
 #' 
