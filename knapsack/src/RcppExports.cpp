@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // intToBinary
-vector<int> intToBinary(int x, unsigned int head);
+std::vector<int> intToBinary(int x, unsigned int head);
 RcppExport SEXP _knapsack_intToBinary(SEXP xSEXP, SEXP headSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
