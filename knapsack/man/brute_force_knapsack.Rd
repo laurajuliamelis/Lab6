@@ -4,7 +4,7 @@
 \alias{brute_force_knapsack}
 \title{The knapsack problem: brute force algorithm.}
 \usage{
-brute_force_knapsack(x, W, parallel = FALSE)
+itr <- iterator
 }
 \arguments{
 \item{x}{an object of class data.frame with two variables v (values) and w (weights).}
@@ -12,6 +12,8 @@ brute_force_knapsack(x, W, parallel = FALSE)
 \item{W}{numeric scalar object that represents the knapsack size.}
 
 \item{parallel}{make the function run in parallel.}
+
+\item{fast}{uses a c++ function for faster execution.}
 
 \item{itr}{iterator}
 

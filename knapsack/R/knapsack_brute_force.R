@@ -12,6 +12,7 @@
 #' @param x an object of class data.frame with two variables v (values) and w (weights).
 #' @param W numeric scalar object that represents the knapsack size.
 #' @param parallel make the function run in parallel.
+#' @param fast uses a c++ function for faster execution.
 #' 
 #' @param itr iterator
 #' @param span vector of the span for x
@@ -37,7 +38,7 @@
 #' @export
 #' 
 
-brute_force_knapsack <- function(x, W, parallel = FALSE){
+brute_force_knapsack <- function(x, W, parallel = FALSE, fast = FALSE){
   combn <- 1:(2^nrow(x))
   
   #' @describeIn brute_force_knapsack Description in main function.

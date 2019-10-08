@@ -8,7 +8,9 @@
 #' Course in Advanced Programming in R.
 #' 
 #' Department of Computer and Information Science, Linköping University.
+#' @useDynLib knapsack
+#' @importFrom Rcpp sourceCpp
 #' 
 #' @docType package
-#' @name rSwedishParliamentVotations
+#' @name knapsack
 NULL
