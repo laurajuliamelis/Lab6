@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <vector>
+//#include <algorithm>
 #include <string>
 using namespace Rcpp;
 using namespace std;
@@ -31,7 +32,7 @@ std::vector<int> intToBinary(int x, unsigned int head) {
     arr.push_back(r);
   }
   
-  reverse(arr.begin(), arr.end());
+  //std::reverse(arr.begin(), arr.end());
   
   return arr;
 }
