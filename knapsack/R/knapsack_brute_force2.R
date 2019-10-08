@@ -44,8 +44,14 @@ brute_force_knapsack2 <- function(x, W){
   
   result <- list()
   
+  # Leave 1 core for other processes to not lock the computer.
   no_cores <- max(1, detectCores() - 1)
-  cl <- makeCluster(no_cores, type="PSOCK") 
+  
+  if(Sys.info()['sysname'] == "Windows"){
+    cl <- makeCluster(no_cores, type="PSOCK") 
+  }else{
+    cl <- makeCluster(no_cores, type="FORK") 
+  }
   registerDoParallel(cl)
   result <- foreach(i=combn) %dopar% .body(i, combn, x, W)
   stopCluster(cl)
@@ -63,4 +69,3 @@ brute_force_knapsack2 <- function(x, W){
 }
 
 
-#Sys.info()['sysname'] == "Windows"
