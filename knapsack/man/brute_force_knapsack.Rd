@@ -12,11 +12,7 @@ brute_force_knapsack(x, W)
 \item{W}{numeric scalar object that represents the knapsack size.}
 }
 \value{
-\code{brute_force_knapsack} returns a list with two elements: 
-
-(i) the elements added to the knapsack and 
-
-(ii) the maximum knapsack value.
+\code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 }
 \description{
 The knapsack problem is a discrete optimization problem where we have a knapsack that can take a 

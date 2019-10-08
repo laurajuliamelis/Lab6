@@ -41,9 +41,17 @@ brute_force_knapsack2 <- function(x, W){
   }
   
   result <- list()
-  for(i in combn){
-    result[[i]] <- .body(i, combn, x, W)
-  }
+  
+  no_cores <- max(1, detectCores() - 1)
+  cl <- makeCluster(no_cores, type="PSOCK") 
+  registerDoParallel(cl)
+  result <- foreach(i=combn) %dopar% .body(i, combn, x, W)
+  stopCluster(cl)
+  
+  # result <- list()
+  # for(i in combn){
+  #   result[[i]] <- .body(i, combn, x, W)
+  # }
   result <- matrix(unlist(result), byrow = TRUE, ncol=2)
   result_index <- which.max(result[,2])
   value <- result[result_index, 2]
