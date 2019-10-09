@@ -39,6 +39,8 @@
 #' 
 
 brute_force_knapsack <- function(x, W, parallel = FALSE, fast = FALSE){
+  stopifnot(W > 0, is.data.frame(x), is.logical(parallel), is.logical(fast))
+  
   combn <- 1:(2^nrow(x))
   
   #' @describeIn brute_force_knapsack Description in main function.

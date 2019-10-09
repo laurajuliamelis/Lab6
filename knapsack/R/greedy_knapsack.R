@@ -30,6 +30,8 @@
 #'
 
 greedy_knapsack <- function(x, W){
+  stopifnot(W > 0, is.data.frame(x))
+  
   x$r <- x$v / x$w
   sort_x <- x[order(x$r, decreasing = T),]
   

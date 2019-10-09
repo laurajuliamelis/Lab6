@@ -24,6 +24,7 @@
 #' 
 
 knapsack_dynamic <- function(x, W){
+  stopifnot(W > 0, is.data.frame(x))
   
   # Output equals 0 when there are no items to pick or the knapsack can hold 0 weight units
   if(nrow(x)==0 || W==0){
