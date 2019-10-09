@@ -24,6 +24,7 @@ elements added to the knapsack.
 \code{knapsack_dynamic} uses the dynamic programming in-advance algorithm.
 }
 \examples{
+knapsack_objects <- generate_knapsack()
 knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
 knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)

@@ -4,7 +4,7 @@
 \alias{brute_force_knapsack}
 \title{The knapsack problem: brute force algorithm.}
 \usage{
-itr <- iterator
+brute_force_knapsack(x, W, parallel = FALSE, fast = FALSE)
 }
 \arguments{
 \item{x}{an object of class data.frame with two variables v (values) and w (weights).}
@@ -14,14 +14,6 @@ itr <- iterator
 \item{parallel}{make the function run in parallel.}
 
 \item{fast}{uses a c++ function for faster execution.}
-
-\item{itr}{iterator}
-
-\item{span}{vector of the span for x}
-
-\item{data_frame}{the data x}
-
-\item{weigth}{the weight W}
 }
 \value{
 \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
@@ -43,7 +35,7 @@ value found.
 }}
 
 \examples{
-knapsack_objects <- generate_backpack()
+knapsack_objects <- generate_knapsack()
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)

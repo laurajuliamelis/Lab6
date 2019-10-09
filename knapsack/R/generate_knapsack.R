@@ -1,26 +1,23 @@
-#' generate_backpack
+#' generate_knapsack
 #'
-#' \code{generate_backpack} makes a GET request for data from the 
-#' Swedish Parlament API, specifically for votations.
+#' \code{generate_knapsack} generates a dataset for example usage of the functions.
 #' 
 #' 
-#' @param period a 
-#' @param span b
-
-#' @return 
+#' @param n number of samples to generate. 
+#' @param seed which seed to use.
+#' @return data.frame with the columns w and v.
 #'
 #' @examples
-#' generate_backpack()
+#' generate_knapsack()
 #' 
 #' @importFrom stats runif
 #'
 #' @export
 #' 
 
-generate_backpack <- function(){
+generate_knapsack <- function(n = 2000, seed = 42){
   # Data
-  set.seed(42)
-  n <- 2000
+  set.seed(seed)
   knapsack_objects <-
     data.frame(
       w=sample(1:4000, size = n, replace = TRUE),

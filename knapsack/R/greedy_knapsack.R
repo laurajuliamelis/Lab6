@@ -19,6 +19,7 @@
 #' @return  \code{greedy_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 #'
 #' @examples
+#' knapsack_objects <- generate_knapsack()
 #' greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 #' greedy_knapsack(x = knapsack_objects[1:12,], W = 3500)
 #' greedy_knapsack(x = knapsack_objects[1:8,], W = 2000)

@@ -30,6 +30,7 @@ elements added to the knapsack.
 (iii) Placing the sorted items in the knapsack until the current weight is higher than the knapsack capacity W.
 }
 \examples{
+knapsack_objects <- generate_knapsack()
 greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 greedy_knapsack(x = knapsack_objects[1:12,], W = 3500)
 greedy_knapsack(x = knapsack_objects[1:8,], W = 2000)

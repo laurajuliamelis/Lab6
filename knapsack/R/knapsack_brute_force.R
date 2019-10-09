@@ -14,16 +14,11 @@
 #' @param parallel make the function run in parallel.
 #' @param fast uses a c++ function for faster execution.
 #' 
-#' @param itr iterator
-#' @param span vector of the span for x
-#' @param data_frame the data x
-#' @param weigth the weight W
-#' @usage itr <- iterator
 #'
 #' @return  \code{brute_force_knapsack} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 #'
 #' @examples
-#' knapsack_objects <- generate_backpack()
+#' knapsack_objects <- generate_knapsack()
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 #' brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
@@ -64,8 +59,15 @@ brute_force_knapsack <- function(x, W, parallel = FALSE, fast = FALSE){
   result <- list()
   
   if(parallel){
-    # Leave 1 core for other processes to not lock the computer.
-    no_cores <- max(1, detectCores() - 1)
+    chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+    if (nzchar(chk) && chk == "TRUE") {
+      # use 2 cores in CRAN/Travis/AppVeyor
+      no_cores <- 2L
+    }else{
+      # Leave 1 core for other processes to not lock the computer.
+      no_cores <- max(1, detectCores() - 1)
+    }
+   
     
     if(Sys.info()['sysname'] == "Windows"){
       cl <- makeCluster(no_cores, type="PSOCK") 

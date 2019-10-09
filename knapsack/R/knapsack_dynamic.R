@@ -13,6 +13,7 @@
 #' @return  \code{knapsack_dynamic} returns a list with two elements: the elements added to the knapsack and the maximum knapsack value.
 #'
 #' @examples
+#' knapsack_objects <- generate_knapsack()
 #' knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 #' knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
 #' knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
