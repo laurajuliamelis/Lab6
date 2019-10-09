@@ -70,7 +70,7 @@ brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 
 We will use the function `microbenchmark` to measure the time that it takes to evaluate this function:
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
 
@@ -85,7 +85,7 @@ knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 
 **QUESTION: How much time does it takes to run the algorithm for n = 500 objects?**
 ```{r}
-microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
+#microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
 ```
 
 ### 2.3. greedy_knapsack( ).
@@ -104,7 +104,7 @@ n <- 1000000
 knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
                                 v=runif(n = n, 0, 10000))
 
-microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
+#microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
 ```
 
 ## 3. Profiling and optimization.
@@ -112,17 +112,17 @@ microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), time
 
 ### 3.1.  Brute force search algorithm.
 ```{r}
-profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+#profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
 ```
 
 ### 3.2. Dynamic programming algorithm.
 ```{r}
-profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+#profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
 ```
 
 ### 3.3. Greddy approximation algorithm.
 ```{r}
-profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+#profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
 ```
 
 **QUESTION: What performance gain could you get by trying to improving your code?**
@@ -146,24 +146,24 @@ So maybe we could get a performance gain in this algorithm by using Rcpp and C++
   
 Process time with `parallel=FALSE` (by default):
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
 Process time with `parallel=TRUE` :
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
 ```
 
   -**If n=20.**
   
 Process time with `parallel=FALSE` (by default):
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
 ```
 
 Process time with `parallel=TRUE` :
 ```{r}
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
 ```
 
 We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. 

@@ -24,13 +24,13 @@ knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
 brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 
 ## ------------------------------------------------------------------------
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 
 ## ------------------------------------------------------------------------
 knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 
 ## ------------------------------------------------------------------------
-microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
+#microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
 
 ## ------------------------------------------------------------------------
 greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
@@ -41,26 +41,26 @@ n <- 1000000
 knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
                                 v=runif(n = n, 0, 10000))
 
-microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
+#microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
 
 ## ------------------------------------------------------------------------
-profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+#profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
 
 ## ------------------------------------------------------------------------
-profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+#profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
 
 ## ------------------------------------------------------------------------
-profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+#profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
 
 ## ------------------------------------------------------------------------
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 
 ## ------------------------------------------------------------------------
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
 
 ## ------------------------------------------------------------------------
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
 
 ## ------------------------------------------------------------------------
-microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
 
