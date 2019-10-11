@@ -143,7 +143,7 @@ Process time with `fast=TRUE`:
 microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, fast= TRUE), times = 5)
 ```
 
-The mean process time is 0.381 seconds.
+The mean process time is 1.713 seconds.
 
 **QUESTION: What performance gain could you get by using Rcpp and C++?**
 
@@ -198,10 +198,46 @@ The mean process time is 15.71219 seconds. So the mean gain performance in this 
 
 We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. Also, there is an overhead time for creating the parallelization of one to two seconds, so the execution time has to be larger in order to get a gain.
 
+### Short Windows Benchmark.
+A quick benchmark for Windows resulted in the following results.
+
+Process time with:
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
+```
+The mean process time is 48.27897 seconds.
+
+Process time with `parallel=TRUE` and `fast=TRUE` :
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+```
+The mean process time is 19.9625 seconds.
+
+```{r, eval=FALSE}
+microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
+```
+
+It takes a mean of 3.830966 seconds.
+
+```{r, eval=FALSE}
+set.seed(42)
+n <- 1000000
+knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
+                                v=runif(n = n, 0, 10000))
+
+microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
+```
+
+It takes a mean of 400.7931 milliseconds.
+
 ### Benchmark specifications. 
 
-  - **OS type:** unix.
+  - **OS type:** Unix
   - **CPU model:** Intel(R) Core(TM) i5-5250U CPU @ 1.60GHz.
+  - **Cores:** 4
+  
+  - **OS type:** Windows
+  - **CPU model:** Intel(R) Core(TM) i7-6560U CPU @ 2.20GHz.
   - **Cores:** 4
 
 ## References.

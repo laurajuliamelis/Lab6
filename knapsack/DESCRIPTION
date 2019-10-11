@@ -1,6 +1,6 @@
 Package: knapsack
 Type: Package
-Title: The knapsak problem.
+Title: The knapsak problem
 Version: 1.0.0
 Date: 2019-10-11
 Authors@R: as.person(c(
