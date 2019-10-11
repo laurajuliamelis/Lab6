@@ -1,7 +1,7 @@
-#' rSwedishParliamentVotations: A linear regression package.
+#' knapsack: The knapsack problem.
 #'
-#' The rSwedishParliamentVotations package contains a function \code{GET_votation}, used to query information for votations in the Swedish Parliment.
-#' 
+#' This package contains three different functions that are three different approaches (of different complexity) to solve the knapsack problem.
+#'
 #' @author
 #' Laura Julia Melis and Martin Svensson.
 #' 
