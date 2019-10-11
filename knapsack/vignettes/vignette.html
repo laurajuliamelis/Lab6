@@ -436,7 +436,18 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,], <span class="dt">W =</span> <span class="dv">3500</span>, <span class="dt">parallel =</span> <span class="ot">TRUE</span>), <span class="dt">times =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>The mean process time in this case is 17.93422 seconds.</p>
 <p>So, whith n= 20 we could get a mean performance gain of 16.263 seconds.</p>
-<p>We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well.</p>
+<p>Process time with <code>parallel=TRUE</code> and <code>fast=TRUE</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,], <span class="dt">W =</span> <span class="dv">3500</span>, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">fast=</span><span class="ot">TRUE</span>), <span class="dt">times =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>The mean process time is 15.71219 seconds. So the mean gain performance in this case would be 2.2 seconds.</p>
+<p>We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. Also, there is an overhead time for creating the parallelization of one to two seconds, so the execution time has to be larger in order to get a gain.</p>
+<div id="benchmark-specifications." class="section level3">
+<h3>Benchmark specifications.</h3>
+<ul>
+<li><strong>OS type:</strong> unix.</li>
+<li><strong>CPU model:</strong> Intel(R) Core(TM) i5-5250U CPU @ 1.60GHz.</li>
+<li><strong>Cores:</strong> 4</li>
+</ul>
+</div>
 </div>
 <div id="references." class="section level2">
 <h2>References.</h2>
