@@ -23,7 +23,7 @@ install.packages("testthat")
 Run the following in R:
 
 ```
-devtools::install_github("laurajuliamelis/Lab6", subdir="knapsack")
+devtools::install_github("laurajuliamelis/Lab6", subdir="knapsack", build_vignettes=TRUE)
 ```
 
 ## Running the tests

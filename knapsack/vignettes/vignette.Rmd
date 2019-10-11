@@ -33,17 +33,6 @@ library(devtools)
 library(knapsack)
 ```
 
-```{r include=FALSE}
-# We need this package to measure the time that it takes to evaluate the functions.
-#install.packages("microbenchmark")
-library(microbenchmark)
-
-# We need this package for the profiling.
-# install.packages("profvis")
-library(profvis)
-```
-
-
 ## 2. Functions.  
 
 ### 2.0. Example data. 
@@ -69,10 +58,11 @@ brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 **QUESTION: How much time does it takes to run the algorithm for n = 16 objects?**
 
 We will use the function `microbenchmark` to measure the time that it takes to evaluate this function:
-```{r}
-#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
+It takes a mean of 1.9533 seconds.
 
 ### 2.2. knapsack_dynamic( ). 
 
@@ -84,9 +74,12 @@ knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 ```
 
 **QUESTION: How much time does it takes to run the algorithm for n = 500 objects?**
-```{r}
-#microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
+```{r, eval=FALSE}
+microbenchmark(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500), times = 5)
 ```
+
+It takes a mean of 2.805 seconds.
+
 
 ### 2.3. greedy_knapsack( ).
 
@@ -98,31 +91,33 @@ greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 ```
 
 **QUESTION: How much time does it takes to run the algorithm for n = 1000000 objects?**
-```{r}
+```{r, eval=FALSE}
 set.seed(42)
 n <- 1000000
 knapsack_objects <- data.frame( w=sample(1:4000, size = n, replace = TRUE),
                                 v=runif(n = n, 0, 10000))
 
-#microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
+microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500), times = 5)
 ```
+
+It takes a mean of 343.213 milliseconds.
 
 ## 3. Profiling and optimization.
 **NOTE:** Package `lineprof` is not available for R version 3.6.1, so we will use package `profvis` instead.
 
 ### 3.1.  Brute force search algorithm.
-```{r}
-#profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```{r, eval=FALSE}
+profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
 ```
 
 ### 3.2. Dynamic programming algorithm.
-```{r}
-#profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```{r, eval=FALSE}
+profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
 ```
 
 ### 3.3. Greddy approximation algorithm.
-```{r}
-#profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+```{r, eval=FALSE}
+profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
 ```
 
 **QUESTION: What performance gain could you get by trying to improving your code?**
@@ -136,7 +131,23 @@ So maybe we could get a performance gain in this algorithm by using Rcpp and C++
 
 ## 4. Implentation in `Rcpp`.
 
+Process time with `fast=FALSE` (by default the function doesn't use the Rcpp implementation):
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+```
+
+The mean process time is 2.189957 seconds.
+
+Process time with `fast=TRUE`:
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, fast= TRUE), times = 5)
+```
+
+The mean process time is 0.381 seconds.
+
 **QUESTION: What performance gain could you get by using Rcpp and C++?**
+
+We could get a mean performance gain of 0.684 seconds. 
 
 ## 5. Parallelization of brute force search.
 
@@ -145,26 +156,38 @@ So maybe we could get a performance gain in this algorithm by using Rcpp and C++
   -**If n=16.**
   
 Process time with `parallel=FALSE` (by default):
-```{r}
-#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500), times = 5)
 ```
 
+The mean process time is 2.169381 seconds.
+
 Process time with `parallel=TRUE` :
-```{r}
-#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500, parallel = TRUE), times = 5)
 ```
+
+The mean process time in this case is 1.485746 seconds.
+
+We could get a mean performance gain of 0.684 seconds. 
 
   -**If n=20.**
   
 Process time with `parallel=FALSE` (by default):
-```{r}
-#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500), times = 1)
 ```
 
+The mean process time is 34.19686 seconds. 
+
 Process time with `parallel=TRUE` :
-```{r}
-#microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
+```{r, eval=FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20,], W = 3500, parallel = TRUE), times = 1)
 ```
+
+The mean process time in this case is 17.93422 seconds. 
+
+So, whith n= 20 we could get a mean performance gain of 16.263 seconds. 
 
 We observe how the mean process time difference increases between the parallel and the serial programming as the n increases as well. 
 

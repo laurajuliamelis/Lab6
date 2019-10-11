@@ -21,6 +21,4 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    devtools,
-    microbenchmark,
-    profvis
+    devtools
