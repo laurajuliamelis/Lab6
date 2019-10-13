@@ -3,7 +3,7 @@
 
 # Lab 6: knapsack
 
-Intermediate API package for the Swedish Parliament Votations.
+Package contains different algorithms for solving the knapsack problem.
 
 ## Getting Started
 
@@ -30,14 +30,6 @@ devtools::install_github("laurajuliamelis/Lab6", subdir="knapsack", build_vignet
 
 ```
 devtools::test()
-```
-
-### Shiny Visualisations
-
-This project has a Shiny application. Run the following to start Shiny:
-
-```
-runGitHub("laurajuliamelis/Lab5Shiny", subdir = "ShinySwedishParliamentVotations")
 ```
 
 ## Built With
